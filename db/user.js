@@ -9,13 +9,6 @@ const UserSchema = Schema({
   Username: { type: String, required: true },
   Password: { type: String, required: true },
   Stations: { type: [{ Id: Number, Name: String, Country: String}], default: []}
-  // surname: { type: String, required: true },
-  // faculty:{ type: String, required: true },
-  // profilePic: String,
-  // interestedAreas: { type: [{ tag: String, count: Number }], default: [] },
-  // followers: { type: [String], default: [] },
-  // following: { type: [String], default: [] },
-  // calendar: { type: [], default: [] }
 });
 
 const User = mongoose.model("User", UserSchema);
