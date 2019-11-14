@@ -1,10 +1,29 @@
 const router = require("express").Router();
 const User = require("../db/user");
+const uuidv1 = require('uuid/v1');
 
 router.post("/", (req, res) => {
-  let {Username, Id, Name, Country} = req.body;
+  let {
+    Username,
+    City,
+    Description,
+    Temperature,
+    MinTemperature,
+    MaxTemperature,
+    WindSpeed,
+    Humidity,
+    Visibility,
+    FirstLowWater,
+    FirstHighWater,
+    SecondLowWater,
+    SecondHighWater,
+    ThirdLowWater,
+    ThirdHighWater,
+    FourthLowWater,
+    FourthHighWater
+  } = req.body;
 
-  if (!Username || !Id || !Name || !Country) {
+  if (!Username || !City || !Description) {
     return res.json({status: "failed", error: "All parameters must be provided"});
   }
 
@@ -12,10 +31,56 @@ router.post("/", (req, res) => {
       .then(user => {
         if (!user) return res.json({status: "failed", error: "No user was found"});
 
-        user.Stations.push({Id, Name, Country});
+        user.Stations.push({
+          Id: uuidv1(),
+          City,
+          Description,
+          Temperature,
+          MinTemperature,
+          MaxTemperature,
+          WindSpeed,
+          Humidity,
+          Visibility,
+          FirstLowWater,
+          FirstHighWater,
+          SecondLowWater,
+          SecondHighWater,
+          ThirdLowWater,
+          ThirdHighWater,
+          FourthLowWater,
+          FourthHighWater
+        });
 
         user.save().then(() => {
           res.json({status: "success", message: "Station is saved"});
+        }).catch(error => {
+          return res.json({status: "failed", error});
+        });
+
+      })
+      .catch(error => {
+        return res.json({status: "failed", error: "Unexpected database error"});
+      });
+});
+
+router.post("/delete", (req, res) => {
+  let {
+    Username,
+    Id
+  } = req.body;
+
+  if (!Username || !Id ) {
+    return res.json({status: "failed", error: "All parameters must be provided"});
+  }
+
+  User.findOne({Username})
+      .then(user => {
+        if (!user) return res.json({status: "failed", error: "No user was found"});
+
+        user.Stations.remove(el => el.Id === Id );
+
+        user.save().then(() => {
+          res.json({status: "success", message: "Station is deleted"});
         }).catch(error => {
           return res.json({status: "failed", error});
         });

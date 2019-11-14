@@ -31,6 +31,7 @@ app.use("/auth/login", require("./routers/authentication/login"));
 
 app.use("/station", require("./routers/station"));
 
+const portNumber = 3030;
 app.listen(process.env.PORT || 3030, () => {
-  console.log(`server is listening`);
+  console.log(`server is listening ${portNumber}`);
 });
