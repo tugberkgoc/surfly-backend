@@ -6,21 +6,21 @@ router.post("/", (req, res) => {
   let {
     Username,
     City,
+    Icon,
     Description,
     Temperature,
     MinTemperature,
     MaxTemperature,
     WindSpeed,
     Humidity,
-    Visibility,
-    FirstLowWater,
-    FirstHighWater,
-    SecondLowWater,
-    SecondHighWater,
-    ThirdLowWater,
-    ThirdHighWater,
-    FourthLowWater,
-    FourthHighWater
+    FirstWater,
+    FirstWaterHeight,
+    SecondWater,
+    SecondWaterHeight,
+    ThirdWater,
+    ThirdWaterHeight,
+    FourthWater,
+    FourthWaterHeight
   } = req.body;
 
   if (!Username || !City || !Description) {
@@ -34,21 +34,21 @@ router.post("/", (req, res) => {
         user.Stations.push({
           Id: uuidv1(),
           City,
+          Icon,
           Description,
           Temperature,
           MinTemperature,
           MaxTemperature,
           WindSpeed,
           Humidity,
-          Visibility,
-          FirstLowWater,
-          FirstHighWater,
-          SecondLowWater,
-          SecondHighWater,
-          ThirdLowWater,
-          ThirdHighWater,
-          FourthLowWater,
-          FourthHighWater
+          FirstWater,
+          FirstWaterHeight,
+          SecondWater,
+          SecondWaterHeight,
+          ThirdWater,
+          ThirdWaterHeight,
+          FourthWater,
+          FourthWaterHeight
         });
 
         user.save().then(() => {
@@ -69,7 +69,7 @@ router.post("/delete", (req, res) => {
     Id
   } = req.body;
 
-  if (!Username || !Id ) {
+  if (!Username || !Id) {
     return res.json({status: "failed", error: "All parameters must be provided"});
   }
 
@@ -77,7 +77,7 @@ router.post("/delete", (req, res) => {
       .then(user => {
         if (!user) return res.json({status: "failed", error: "No user was found"});
 
-        user.Stations.remove(el => el.Id === Id );
+        user.Stations.remove(el => el.Id === Id);
 
         user.save().then(() => {
           res.json({status: "success", message: "Station is deleted"});

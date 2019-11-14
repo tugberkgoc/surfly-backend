@@ -12,21 +12,21 @@ const UserSchema = Schema({
     type: [{
       Id: Number,
       City: String,
+      Icon: String,
       Description: String,
       Temperature: String,
       MinTemperature: String,
       MaxTemperature: String,
       WindSpeed: String,
       Humidity: String,
-      Visibility: String,
-      FirstLowWater: String,
-      FirstHighWater: String,
-      SecondLowWater: String,
-      SecondHighWater: String,
-      ThirdLowWater: String,
-      ThirdHighWater: String,
-      FourthLowWater: String,
-      FourthHighWater: String
+      FirstWater: String,
+      FirstWaterHeight: String,
+      SecondWater: String,
+      SecondWaterHeight: String,
+      ThirdWater: String,
+      ThirdWaterHeight: String,
+      FourthWater: String,
+      FourthWaterHeight: String
     }], default: []
   }
 });
