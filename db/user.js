@@ -10,8 +10,9 @@ const UserSchema = Schema({
   Password: {type: String, required: true},
   Stations: {
     type: [{
-      Id: Number,
+      Id: String,
       City: String,
+      DateTime: String,
       Icon: String,
       Description: String,
       Temperature: String,
