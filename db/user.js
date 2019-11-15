@@ -12,7 +12,7 @@ const UserSchema = Schema({
     type: [{
       Id: String,
       City: String,
-      DateTime: String,
+      Date: String,
       Icon: String,
       Description: String,
       Temperature: String,

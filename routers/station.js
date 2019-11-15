@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
           user.Stations.push({
             Id: uuidv1(),
             City: req.body[i].City,
-            DateTime: req.body[i].DateTime,
+            Date: req.body[i].Date,
             Icon: req.body[i].Icon,
             Description: req.body[i].Description,
             Temperature: req.body[i].Temperature,
